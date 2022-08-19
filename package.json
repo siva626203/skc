@@ -2,6 +2,7 @@
   "name": "skc",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://majestic-narwhal-d219b0.netlify.app/",
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
@@ -25,7 +26,9 @@
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
     "styled-components": "^5.3.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -50,5 +53,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.18.10",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "html-webpack-plugin": "^5.5.0",
+    "webpack-dev-server": "^4.10.0"
   }
 }
