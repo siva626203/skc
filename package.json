@@ -4,8 +4,6 @@
   "private": true,
   "homepage": "https://majestic-narwhal-d219b0.netlify.app/",
   "dependencies": {
-    "@emotion/react": "^11.9.3",
-    "@emotion/styled": "^11.9.3",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.1",
     "@mui/styled-engine-sc": "^5.8.0",
@@ -15,6 +13,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
+    "lodash": "^4.17.21",
     "netlify-cli": "^10.17.7",
     "react": "^18.2.0",
     "react-bootstrap": "^2.4.0",
@@ -53,14 +52,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@babel/preset-env": "^7.18.10",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.2.5",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "html-webpack-plugin": "^5.5.0",
-    "webpack-dev-server": "^4.10.0"
   }
 }
