@@ -19,6 +19,7 @@ function Register(props) {
 const dispatch=useDispatch()
 const Submit= async ()=>{
   try {
+     
     await axios.post('https://skc-api-db.herokuapp.com/api/register',{
       cname:cname,
       caddress:caddress,
