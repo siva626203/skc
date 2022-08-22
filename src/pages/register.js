@@ -14,8 +14,8 @@ function Register(props) {
     const [caddress,setCaddress]=useState("");
     const [sname,setSname]=useState("");
     const [scontact,setScontact]=useState(0);
-    const [sdname,setSdname]=useState([""]);
-    const [sdevent,setSdevent]=useState([""])
+    const [sdname,setSdname]=useState([]);
+    const [sdevent,setSdevent]=useState([])
 const dispatch=useDispatch()
 const Submit= async ()=>{
   try {
@@ -23,14 +23,11 @@ const Submit= async ()=>{
       cname:cname,
       caddress:caddress,
       sname:sname,
-      scontact:3923029200,
+      scontact:scontact,
       sdname:[{
-          name:sdname}
+          name:sdname.toString()}
          ],
-      sdevent:[
-          {event:sdevent},
-          
-      ]
+      sdevent:[{event:sdevent.toString()}],
     })
 
    alert("data Posted")
