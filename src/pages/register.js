@@ -25,9 +25,9 @@ const Submit= async ()=>{
       sname:sname,
       scontact:scontact,
       sdname:[{
-          name:sdname.toString()}
+          name:sdname}
          ],
-      sdevent:[{event:sdevent.toString()}],
+      sdevent:[{event:sdevent}],
     })
 
    alert("data Posted")
@@ -69,17 +69,17 @@ const Submit= async ()=>{
         </Form.Select>
       </Form.Group>
       {_.times(sno, (i) => (
-            <ul key={i}> <Row>
+            <ul> <Row>
             <Col>
               <Form.Control placeholder="Name" onChange={e=>setSdname(e.target.value)}/>
             </Col>
             <Col>
-              <Form.Select key={i} onChange={e=>setSdevent(e.target.value)}>
-                <option>Web Design</option>
-                <option>Dance</option>
-                <option>Debuging</option>
-                <option>Paper Presentation</option>
-                <option>Others</option>
+              <Form.Select onChange={e=>setSdevent(e.target.value)}>
+                <option value='Web Design'>Web Design</option>
+                <option value="Dance">Dance</option>
+                <option value="Debuging">Debuging</option>
+                <option value="Paper Presentation">Paper Presentation</option>
+                <option value="Others">Others</option>
               </Form.Select>
             </Col>
           </Row></ul>
