@@ -8,15 +8,16 @@ import register from '../features/register';
 import { Button } from 'react-bootstrap';
 import {Navigate, useNavigate} from 'react-router-dom'
 import axios from 'axios'
+
 function Register(props) {
     const[sno,setSno]=useState(0)
     const [cname,setCname]=useState("");
     const [caddress,setCaddress]=useState("");
     const [sname,setSname]=useState("");
     const [scontact,setScontact]=useState(0);
-    const [sdname,setSdname]=useState([]);
-    const [sdevent,setSdevent]=useState([])
-const dispatch=useDispatch()
+    const [sdname,setSdname]=useState({});
+    const [sdevent,setSdevent]=useState({})
+    const navigate=useNavigate();
 const Submit= async ()=>{
   try {
      
@@ -25,13 +26,16 @@ const Submit= async ()=>{
       caddress:caddress,
       sname:sname,
       scontact:scontact,
-      sdname:[{
-          name:sdname}
+      sdname:[
+        {name:sdname}
          ],
-      sdevent:[{event:sdevent}],
+      sdevent:[
+        {event:sdevent}
+      ],
     })
 
    alert("data Posted")
+  
    
   } catch (error) {
    
@@ -74,14 +78,17 @@ const Submit= async ()=>{
             <Col>
               <Form.Control placeholder="Name" onChange={e=>setSdname(e.target.value)}/>
             </Col>
+
             <Col>
-              <Form.Select onChange={e=>setSdevent(e.target.value)}>
+            <Form.Group onChange={e=>setSdevent(e.target.value)}>
+              <Form.Select>
                 <option value='Web Design'>Web Design</option>
                 <option value="Dance">Dance</option>
                 <option value="Debuging">Debuging</option>
                 <option value="Paper Presentation">Paper Presentation</option>
                 <option value="Others">Others</option>
               </Form.Select>
+              </Form.Group>
             </Col>
           </Row></ul>
           ))}
