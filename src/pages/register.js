@@ -9,20 +9,21 @@ import { Button } from 'react-bootstrap';
 import {Navigate, useNavigate} from 'react-router-dom'
 import axios from 'axios'
 
+
 function Register(props) {
+ 
     const[sno,setSno]=useState(0)
     const [cname,setCname]=useState("");
     const [caddress,setCaddress]=useState("");
     const [sname,setSname]=useState("");
     const [scontact,setScontact]=useState(0);
-    const [sdname,setSdname]=useState({});
-    const [sdevent,setSdevent]=useState({})
+    const [sdname,setSdname]=useState([""]);
+    const [sdevent,setSdevent]=useState([""])
     const navigate=useNavigate();
-const Submit= async ()=>{
+const Submit= async (e)=>{
   try {
-     
-    await axios.post('https://skc-api-db.herokuapp.com/api/register',{
-      cname:cname,
+    e.preventDefault();
+    let data={cname:cname,
       caddress:caddress,
       sname:sname,
       scontact:scontact,
@@ -31,8 +32,8 @@ const Submit= async ()=>{
          ],
       sdevent:[
         {event:sdevent}
-      ],
-    })
+      ]};
+    await axios.post('https://skc-api-db.herokuapp.com/api/register',data)
 
    alert("data Posted")
   
@@ -42,7 +43,7 @@ const Submit= async ()=>{
     console.log(error)
   }
 }
-    return (
+   return (
         <div className='rform'>
             <h1>Register</h1>
             <Form className='md-3'>
@@ -62,9 +63,9 @@ const Submit= async ()=>{
         <Form.Label>Enter Staff Contact</Form.Label>
         <Form.Control type="text" placeholder="Enter Staff No" onChange={e=>setScontact(e.target.value)}/> 
       </Form.Group>
-      <Form.Group className="mb-3" onChange={e=>setSno(e.target.value)}>
+      <Form.Group className="mb-3" >
         <Form.Label>Enter Students Details</Form.Label>
-        <Form.Select>
+        <Form.Select onClick={e=>setSno(e.target.value)}>
         <option>0</option> 
           <option>3</option>
           <option>4</option>
@@ -73,25 +74,35 @@ const Submit= async ()=>{
           <option>7</option>
         </Form.Select>
       </Form.Group>
+      <Form.Group >
       {_.times(sno, (i) => (
-            <ul> <Row>
+            <ul key={i}> <Row>
             <Col>
-              <Form.Control placeholder="Name" onChange={e=>setSdname(e.target.value)}/>
+            <p>{i}</p>
+              <Form.Control  onChange={e=>setSdevent(...sdevent,e.target.value)} placeholder="Name"/>
             </Col>
-
+            </Row>
+            </ul>
+            ))}
+            </Form.Group>
+            <Form.Group>
+            {_.times(sno,(i)=>(
+              <Row>
             <Col>
-            <Form.Group onChange={e=>setSdevent(e.target.value)}>
-              <Form.Select>
+            <p>{i}</p>
+              <Form.Select onChange={e=>setSdname(...sdname,e.target.value)}>
+                
                 <option value='Web Design'>Web Design</option>
                 <option value="Dance">Dance</option>
                 <option value="Debuging">Debuging</option>
                 <option value="Paper Presentation">Paper Presentation</option>
                 <option value="Others">Others</option>
               </Form.Select>
-              </Form.Group>
             </Col>
-          </Row></ul>
-          ))}
+            </Row>
+            ))}
+            </Form.Group>
+          
           
             <Button type='submit' className='mb-3'  onClick={Submit()}>SUBMIT</Button>
           
