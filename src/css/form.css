@@ -4,3 +4,43 @@
     border-radius: 20px;
     text-align: center;
 }
+.login {
+    position: relative;
+    background: white;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    float: right;
+    right: 20px;
+  }
+  
+  .login::before {
+    content: '';
+    position: absolute;
+    visibility: visible;
+    top: -1px;
+    right: -10px;
+    border: 10px solid transparent;
+    border-top: 10px solid #ccc;
+  }
+  
+  .login::after {
+    content: '';
+    position: absolute;
+    visibility: visible;
+    top: 0px;
+    right: -8px;
+    border: 10px solid transparent;
+    border-top: 10px solid white;
+    clear: both;
+  }
+  .cl-login{
+    padding: 30px;
+  }
+  .f-login{
+    padding: 30px;
+  }
+  .a-login{
+    padding: 30px;
+  }

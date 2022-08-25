@@ -17,12 +17,14 @@ function Register(props) {
     const [caddress,setCaddress]=useState("");
     const [sname,setSname]=useState("");
     const [scontact,setScontact]=useState(0);
-    const [sdname,setSdname]=useState([""]);
-    const [sdevent,setSdevent]=useState([""])
+    const [sdname,setSdname]=useState();
+    const [sdevent,setSdevent]=useState()
     const navigate=useNavigate();
 const Submit= async (e)=>{
-  try {
-    e.preventDefault();
+ 
+
+
+    
     let data={cname:cname,
       caddress:caddress,
       sname:sname,
@@ -38,15 +40,13 @@ const Submit= async (e)=>{
    alert("data Posted")
   
    
-  } catch (error) {
-   
-    console.log(error)
-  }
+
+  e.preventDefault();
 }
    return (
         <div className='rform'>
-            <h1>Register</h1>
-            <Form className='md-3'>
+            <h1>Register</h1> 
+            <Form className='md-3' onSubmit={Submit()}>
             <Form.Group className="mb-3" controlId="formBasicText">
         <Form.Label>Enter Your College Name</Form.Label>
         <Form.Control type="text" placeholder="Enter college Name" onChange={e=>setCname(e.target.value)}/> 
@@ -63,49 +63,7 @@ const Submit= async (e)=>{
         <Form.Label>Enter Staff Contact</Form.Label>
         <Form.Control type="text" placeholder="Enter Staff No" onChange={e=>setScontact(e.target.value)}/> 
       </Form.Group>
-      <Form.Group className="mb-3" >
-        <Form.Label>Enter Students Details</Form.Label>
-        <Form.Select onClick={e=>setSno(e.target.value)}>
-        <option>0</option> 
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
-          <option>7</option>
-        </Form.Select>
-      </Form.Group>
-      <Form.Group >
-      {_.times(sno, (i) => (
-            <ul key={i}> <Row>
-            <Col>
-            <p>{i}</p>
-              <Form.Control  onChange={e=>setSdevent(...sdevent,e.target.value)} placeholder="Name"/>
-            </Col>
-            </Row>
-            </ul>
-            ))}
-            </Form.Group>
-            <Form.Group>
-            {_.times(sno,(i)=>(
-              <Row>
-            <Col>
-            <p>{i}</p>
-              <Form.Select onChange={e=>setSdname(...sdname,e.target.value)}>
-                
-                <option value='Web Design'>Web Design</option>
-                <option value="Dance">Dance</option>
-                <option value="Debuging">Debuging</option>
-                <option value="Paper Presentation">Paper Presentation</option>
-                <option value="Others">Others</option>
-              </Form.Select>
-            </Col>
-            </Row>
-            ))}
-            </Form.Group>
-          
-          
-            <Button type='submit' className='mb-3'  onClick={Submit()}>SUBMIT</Button>
-          
+            <Button type='submit' className='mb-3'>SUBMIT</Button>
       </Form>
         </div>
     );
