@@ -21,21 +21,12 @@ function Register(props) {
     const [sdevent,setSdevent]=useState()
     const navigate=useNavigate();
 const Submit= async (e)=>{
- 
-
-
-    
-    let data={cname:cname,
+     let data={cname:cname,
       caddress:caddress,
       sname:sname,
       scontact:scontact,
-      sdname:[
-        {name:sdname}
-         ],
-      sdevent:[
-        {event:sdevent}
-      ]};
-    await axios.post('https://skc-api-db.herokuapp.com/api/register',data)
+     };
+          await axios.post('https://skc-api-db.herokuapp.com/api/register',data)
 
    alert("data Posted")
   
