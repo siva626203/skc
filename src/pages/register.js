@@ -5,22 +5,26 @@ import Row from 'react-bootstrap/Row';
 import {useDispatch } from 'react-redux';
 import _ from "lodash";
 import register from '../features/register';
-import { Button } from 'react-bootstrap';
+import { Button, InputGroup } from 'react-bootstrap';
 import {Navigate, useNavigate} from 'react-router-dom'
 import axios from 'axios'
-import { useFormik } from 'formik'
+import { useFormik,Field } from 'formik'
 import * as yup from 'yup'
-
+import { render } from 'react-dom';
+import { toast } from 'react-toastify';
 
 
 function Register() {
+  const navigate=useNavigate();
   const formik=useFormik({
     initialValues:{
+      username:"",
+      password:"",
       cname:"",
       caddress:"",
       sname:"",
-      scontact:0,
-      stno:0
+      scontact:yup.number
+  
     },validationSchema:yup.object({
       cname:yup.string()
       .required("College Name Is required"),
@@ -29,21 +33,46 @@ function Register() {
       sname:yup.string()
       .required("Staff Name is required"),
       scontact:yup.number()
-      .required("Staff Contact Number is required"),
-      stno:yup.number()
-      .required("Student No is required")
-      .min(3,"minimum 3 participation")
-      .max(16,"maximum 16 participation")
-    }),
+      .required("Staff Contact Number is required")
+        }),
     onSubmit:(data)=>{
       console.log(data)
-      axios.post()
+      toast.success("Success Notification !", {
+        position: toast.POSITION.TOP_RIGHT
+      });
     }
   });
    return (
         <div className='rform'>
             <h1>Register</h1> 
             <Form className='md-3' onSubmit={formik.handleSubmit}>
+              <Form.Group>
+                <Form.Label>Enter the UserName</Form.Label>
+              <InputGroup>
+        <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+        <Form.Control
+          placeholder="Username"
+          aria-label="Username"
+          aria-describedby="basic-addon1"
+          value={formik.values.username}
+        onChange={formik.handleChange}
+        name="username"
+        />
+      </InputGroup>
+      <Form.Label className="inputPassword5">Password</Form.Label>
+      <Form.Control
+        type="password"
+        id="inputPassword5"
+        aria-describedby="passwordHelpBlock"
+        value={formik.values.password}
+        onChange={formik.handleChange}
+        name="password"
+      />
+      <Form.Text id="passwordHelpBlock" muted>
+        Your password must be 8-20 characters long, contain letters and numbers,
+        and must not contain spaces, special characters, or emoji.
+      </Form.Text>
+              </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicText">
         <Form.Label>Enter Your College Name</Form.Label>
         <Form.Control type="text" placeholder="Enter college Name" onChange={formik.handleChange} name="cname" value={formik.values.cname}/> 
@@ -61,15 +90,10 @@ function Register() {
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicText">
         <Form.Label>Enter Staff Contact</Form.Label>
-        <Form.Control type="text" placeholder="Enter Staff No" onChange={formik.handleChange} name="scontact" value={formik.values.scontact}/> 
+        <Form.Control aria-autocomplete='false' type="text" placeholder="Enter Staff No" onChange={formik.handleChange} name="scontact" value={formik.values.scontact}/> 
         {formik.errors.scontact ?<p className='text-danger'>{formik.errors.scontact}</p>:null}
       </Form.Group>
-      <Form.Group>
-        <Form.Label>Enter No of Students Participation</Form.Label>
-        <Form.Control type="text" placeholder="Enter No of Students" onChange={formik.handleChange} name="stno" value={formik.values.stno}/> 
-        {formik.errors.stno ?<p className='text-danger'>{formik.errors.stno}</p>:null}
-      </Form.Group>
-            <Button type='submit' className='mb-3'>SUBMIT</Button>
+                  <Button type='submit' className='mb-3'>SUBMIT</Button>
       </Form>
         </div>
     );

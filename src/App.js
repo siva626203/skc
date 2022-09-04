@@ -8,10 +8,13 @@ import Alloncement from "./pages/alloncement";
 import Activitys from "./pages/activitys";
 import Course from "./pages/course";
 import Header from "./component/header";
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <div className="App">
       <Header />
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />}/>
         <Route path="/login" element={<Login />}/>
@@ -21,7 +24,10 @@ function App() {
         <Route path="/course" element={<Course />}/>
         <Route path="/activitys" element={<Activitys />}/>
       </Routes>
+      
     </div>
+
+
   );
 }
 
