@@ -6,7 +6,7 @@ import {useDispatch } from 'react-redux';
 import _ from "lodash";
 import register from '../features/register';
 import { Button, InputGroup } from 'react-bootstrap';
-import {Navigate, useNavigate} from 'react-router-dom'
+import {Navigate} from 'react-router-dom'
 import axios from 'axios'
 import { useFormik,Field } from 'formik'
 import * as yup from 'yup'
@@ -15,7 +15,7 @@ import { toast } from 'react-toastify';
 
 
 function Register() {
-  const navigate=useNavigate();
+
   const formik=useFormik({
     initialValues:{
       username:"",
@@ -37,9 +37,17 @@ function Register() {
         }),
     onSubmit:(data)=>{
       console.log(data)
-      toast.success("Success Notification !", {
-        position: toast.POSITION.TOP_RIGHT
-      });
+      axios.post("https://skc-api-db.herokuapp.com/api/register",data)
+      .then(res=>{
+        toast.success("success", {
+          position: toast.POSITION.TOP_RIGHT
+        });
+        Navigate("/login")
+      })
+      .catch(err=>{
+        toast.error(err.response.data);
+      })
+      
     }
   });
    return (
