@@ -19,7 +19,7 @@ function Home(){
         <input type="text" name={name} onChange={e=>setUsername(e.target.value)}/>
         <input type="email" name={email} onChange={e=>setEmail(e.target.value)}/>
         
-        <button onClick={()=>dispatch(login({name,age,email}))}>Login</button>;
+        <button onClick={()=>dispatch(login())}>Login</button>;
         <button onClick={()=>dispatch(logout())}>logout</button>
         
       

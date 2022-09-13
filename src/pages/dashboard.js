@@ -1,27 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
+import { useSelector,useDispatch } from "react-redux";
+import { logout } from "../features/user";
 function Dashboard(){
+    const dispatch=useDispatch();
     const navigate=useNavigate()
-    let token=JSON.parse(localStorage.getItem("Name"))
-    const [user,setUser]=useState(token);
-   
+    
+    let currentUser=useSelector(state=>state.user.value)
+    const [user,setUser]=useState();
+   const usercheck=()=>setUser(currentUser.username);
     const check=()=>{
-        console.log(token)
+        usercheck()
         console.log("login Status");
-        if(user==null){
-        navigate("*")
+        if(currentUser.username==null){
+        navigate("/login")
         }
+    }
+    const Logout=()=>{
+        dispatch(logout())
+    navigate("/login")
     }
 useEffect(()=>{
     check();
-    
+   
     console.log(user)
 },[]);
     return(
         <div>
            <h1> dashboard</h1>
-           <Button>Logout</Button>
+           <h1>Welcome to Our {currentUser.username}</h1>
+           <Button onClick={Logout}>Logout</Button>
         </div>
     )
 }

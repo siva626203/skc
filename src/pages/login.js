@@ -7,7 +7,10 @@ import { useFormik } from 'formik';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router';
+import { useSelector,useDispatch } from 'react-redux';
+import { login } from '../features/user';
 function Login() {
+  const dispatch=useDispatch();
   const navigate=useNavigate();
   const [show, setShow] = useState(false);
   const [fshow, fsetShow] = useState(false);
@@ -38,7 +41,7 @@ onSubmit:(data)=>{
     if(req.data==="user not found"){
       toast.error(req.data)
     }else{
-      localStorage.setItem('Name', JSON.stringify(req.data.username));
+      dispatch(login({username:formik.values.username}))
       toast.success("Welcome to Skc Admin")
       navigate("/dashboard")
 
