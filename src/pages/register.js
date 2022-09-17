@@ -43,10 +43,16 @@ function Register() {
       console.log(data)
       axios.post("https://skc-api-db.herokuapp.com/api/college/register",data)
       .then(res=>{
+        if(res.data==="username already Exist"){
+          toast.error(res.data);
+        }
+        else{
         toast.success("success", {
           position: toast.POSITION.TOP_RIGHT
         });
+
         Navigate("/login")
+      }
       })
       .catch(err=>{
         toast.error(err.response.data);
@@ -108,7 +114,7 @@ function Register() {
       <Form.Group className="mb-3" controlId="formBasicText">
         <Form.Label>Position</Form.Label>
         <Form.Control disabled placeholder='college' type="text"  onChange={formik.handleChange} name="status" value={formik.values.status}/> 
-        {formik.errors.scontact ?<p className='text-danger'>{formik.errors.status}</p>:null}
+        {formik.errors.status ?<p className='text-danger'>{formik.errors.status}</p>:null}
       </Form.Group>
                   <Button type='submit' className='mb-3'>SUBMIT</Button>
       </Form>

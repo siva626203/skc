@@ -22,7 +22,7 @@ this.getAll();
     }
 
  getAll=()=>{
-      axios.get("http://localhost:8080/api/auth/college/datails")
+      axios.get("https://skc-api-db.herokuapp.com/api/auth/college/datails")
             .then((req,res)=>{
                 this.setState({
                     data:req.data
@@ -53,8 +53,8 @@ this.getAll();
           {
             
             this.state.data.map(e=>
-                <tr key={e.username}>
-                    <td>{e.id}</td>
+                <tr key={e._id}>
+                    <td>{e._id}</td>
                     <td>{e.cname}</td>
                     <td>{e.caddress}</td>
                     <td>{e.sname}</td>
