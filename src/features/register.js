@@ -1,13 +1,13 @@
 import {createSlice} from '@reduxjs/toolkit'
 export const registerSlice= createSlice({
     name: 'register',
-    initialState: {value: {cname:"",caddress:"",sname:"",scontact:0,sdname:"",sdevent:""}},
+    initialState: {value: {position:""}},
     reducers: {
-        register: (state,action)=>{
+        status: (state,action)=>{
             state.value=action.payload;
         }
     }   
 },   
 )
-export const {register}= registerSlice.actions;
+export const {status}= registerSlice.actions;
 export default registerSlice.reducer;

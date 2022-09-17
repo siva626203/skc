@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useSelector,useDispatch } from "react-redux";
 import { logout } from "../features/user";
+import axios from "axios";
+import ListTable from "../component/table";
 function Dashboard(){
     const dispatch=useDispatch();
     const navigate=useNavigate()
@@ -12,7 +14,7 @@ function Dashboard(){
    const usercheck=()=>setUser(currentUser.username);
     const check=()=>{
         usercheck()
-        console.log("login Status");
+       
         if(currentUser.username==null){
         navigate("/login")
         }
@@ -31,6 +33,8 @@ useEffect(()=>{
            <h1> dashboard</h1>
            <h1>Welcome to Our {currentUser.username}</h1>
            <Button onClick={Logout}>Logout</Button>
+           <ListTable/>
+
         </div>
     )
 }

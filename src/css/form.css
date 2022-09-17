@@ -44,3 +44,9 @@
   .a-login{
     padding: 30px;
   }
+  .d-list{
+    color: red;
+    text-rendering: initial;
+    text-align: center;
+  
+  }

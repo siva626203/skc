@@ -23,6 +23,7 @@ function Register() {
       cname:"",
       caddress:"",
       sname:"",
+      status:"college",
       scontact:yup.number
   
     },validationSchema:yup.object({
@@ -32,12 +33,15 @@ function Register() {
       .required("College Address is required"),
       sname:yup.string()
       .required("Staff Name is required"),
+      status:yup.string()
+      .required("default value")
+      .default("college"),
       scontact:yup.number()
       .required("Staff Contact Number is required")
         }),
     onSubmit:(data)=>{
       console.log(data)
-      axios.post("https://skc-api-db.herokuapp.com/api/register",data)
+      axios.post("https://skc-api-db.herokuapp.com/api/college/register",data)
       .then(res=>{
         toast.success("success", {
           position: toast.POSITION.TOP_RIGHT
@@ -100,6 +104,11 @@ function Register() {
         <Form.Label>Enter Staff Contact</Form.Label>
         <Form.Control aria-autocomplete='false' type="text" placeholder="Enter Staff No" onChange={formik.handleChange} name="scontact" value={formik.values.scontact}/> 
         {formik.errors.scontact ?<p className='text-danger'>{formik.errors.scontact}</p>:null}
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicText">
+        <Form.Label>Position</Form.Label>
+        <Form.Control disabled placeholder='college' aria-autocomplete='false' type="text"  onChange={formik.handleChange} name="status" value={formik.values.status}/> 
+        {formik.errors.scontact ?<p className='text-danger'>{formik.errors.status}</p>:null}
       </Form.Group>
                   <Button type='submit' className='mb-3'>SUBMIT</Button>
       </Form>

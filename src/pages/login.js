@@ -54,6 +54,39 @@ onSubmit:(data)=>{
 
 
 })
+const cformik=useFormik({initialValues:{
+  username:"",
+  password:""
+  },
+  validationSchema:yup.object({
+    username:yup.string()
+    .required("This field is required"),
+    password:yup.string()
+    .required("*")
+  }),
+  onSubmit:(data)=>{
+    console.log(data)
+    axios.post("https://skc-api-db.herokuapp.com/api/auth/college/login",data)
+    .then((req,res)=>{
+      
+      console.log(req.data)
+      
+      if(req.data==="user not found"){
+        toast.error(req.data)
+      }else{
+        dispatch(login({username:cformik.values.username}))
+        toast.success("Welcome to SKC")
+        navigate("/dashboard")
+  
+      }
+      
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+  
+  
+  })
   return (
     < div className='login'>
     < div className='cl-login'>
@@ -66,12 +99,14 @@ onSubmit:(data)=>{
           <Modal.Title>College's Login</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <Form>
+            <Form onSubmit={cformik.handleSubmit}>
                 <Form.Group>
                     <Form.Label>Enter Your UserName</Form.Label>
-                    <Form.Control type='text' required/>
+                    <Form.Control type='text' required onChange={cformik.handleChange} name="username" value={cformik.values.username}/>
+                    {<p className='text-danger'>{cformik.errors.username}</p>}
                     <Form.Label>Enter Your password</Form.Label>
-                    <Form.Control type='password' required/>
+                    <Form.Control type='password' required value={cformik.values.password} onChange={cformik.handleChange} name="password"/>
+                    {<p className='text-danger'>{cformik.errors.password}</p>}
                     <Button type='submit' variant='success'>SUBMIT</Button>
                 </Form.Group>
             </Form>
