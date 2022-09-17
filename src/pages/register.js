@@ -107,7 +107,7 @@ function Register() {
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicText">
         <Form.Label>Position</Form.Label>
-        <Form.Control disabled placeholder='college' aria-autocomplete='false' type="text"  onChange={formik.handleChange} name="status" value={formik.values.status}/> 
+        <Form.Control disabled placeholder='college' type="text"  onChange={formik.handleChange} name="status" value={formik.values.status}/> 
         {formik.errors.scontact ?<p className='text-danger'>{formik.errors.status}</p>:null}
       </Form.Group>
                   <Button type='submit' className='mb-3'>SUBMIT</Button>
