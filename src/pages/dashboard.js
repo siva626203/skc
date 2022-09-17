@@ -14,7 +14,7 @@ function Dashboard(){
    const usercheck=()=>setUser(currentUser.username);
     const check=()=>{
         usercheck()
-       
+       console.log(currentUser.status)
         if(currentUser.username==null){
         navigate("/login")
         }
@@ -33,7 +33,8 @@ useEffect(()=>{
            <h1> dashboard</h1>
            <h1>Welcome to Our {currentUser.username}</h1>
            <Button onClick={Logout}>Logout</Button>
-           <ListTable/>
+           {(currentUser.status==="admin") ? <ListTable/>:null }
+           
 
         </div>
     )

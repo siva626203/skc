@@ -33,15 +33,16 @@ validationSchema:yup.object({
 }),
 onSubmit:(data)=>{
   console.log(data)
-  axios.post("https://skc-api-db.herokuapp.com/api/auth/admin/login",data)
+  axios.post("http://localhost:8080/api/auth/admin/login",data)
   .then((req,res)=>{
     
-    console.log(req.data)
     
+    console.log(req.data)
     if(req.data==="user not found"){
       toast.error(req.data)
     }else{
-      dispatch(login({username:formik.values.username}))
+      console.log(res)
+      dispatch(login({username:formik.values.username,status:req.data}))
       toast.success("Welcome to Skc Admin")
       navigate("/dashboard")
 

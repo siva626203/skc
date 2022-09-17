@@ -11,19 +11,8 @@ function Home(){
   const age=18;
     const user=useSelector(state => state.user.value);
     const register=useSelector(state=>state.register.value)
-    return<Fragment>
+    return<Fragment>      
       
-        <h1>{user.name}</h1>
-        <h1>{user.email}</h1>
-        <h1>{register.cname}</h1>
-        <input type="text" name={name} onChange={e=>setUsername(e.target.value)}/>
-        <input type="email" name={email} onChange={e=>setEmail(e.target.value)}/>
-        
-        <button onClick={()=>dispatch(login())}>Login</button>;
-        <button onClick={()=>dispatch(logout())}>logout</button>
-        
-      
-    <Footer/>
     </Fragment>
 }
 export default Home;
