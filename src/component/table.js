@@ -72,7 +72,7 @@ this.getAll();
                     <td>{e.scontact}</td>   
                     <td><Button onClick={this.Delete=()=>{
                         console.log(e)
-                          axios.delete("https://skc-api-db.herokuapp.com/api/college/delete",{data:{userName:`${e.username}`}})
+                          axios.delete("https://skc-api-db.herokuapp.com/api/college/delete",{data:{username:`${e.username}`}})
                           .then((req,res)=>{
                               toast.success("Deleted successfully");
                               this.getAll();
@@ -112,7 +112,7 @@ this.getAll();
                     <td>{e.eventname}</td>   
                     <td><Button onClick={this.Delete=()=>{
                         console.log(e)
-                          axios.delete("https://skc-api-db.herokuapp.com/faculty/delete",{data:{username:`${e.username}`}})
+                          axios.delete("https://skc-api-db.herokuapp.com/api/faculty/delete",{data:{username:`${e.username}`}})
                           .then((req,res)=>{
                               toast.success("Deleted successfully");
                               this.getAll();
