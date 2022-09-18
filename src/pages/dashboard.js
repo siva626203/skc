@@ -8,6 +8,7 @@ import ListTable from "../component/table";
 import { useFormik, yupToFormErrors } from "formik";
 import * as yup  from 'yup';
 import {toast} from 'react-toastify'
+import Student from "../component/student";
 
 function Dashboard(){
     const formik=useFormik({
@@ -15,7 +16,8 @@ function Dashboard(){
             facultyname:"",
             username:"",
             password:"",
-            eventname:""
+            eventname:"",
+            status:"faculty"
         },
         validationSchema:yup.object({
             facultyname:yup.string()
@@ -93,6 +95,9 @@ useEffect(()=>{
                  <option>Paper Presentation</option>
                 </Form.Select>
                 {<p className='text-danger'>{formik.errors.eventname}</p>}
+                <Form.Label>Position</Form.Label>
+                <Form.Control disabled value={formik.values.status} type="text" onChange={formik.handleChange} name="status"></Form.Control>
+                
                 <Button variant="primary" type="submit">Submit</Button>
                 </Form.Group>
             </Form>

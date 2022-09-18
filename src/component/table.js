@@ -96,6 +96,7 @@ this.getAll();
                 <th>Faculty userName</th>
                 <th>Faculty password</th>
                 <th>Faculty eventname</th>
+                <th>Position</th>
                 <td>Delete</td>
             </tr>
             <Button onClick={this.getAll}>Refresh</Button>
@@ -109,7 +110,8 @@ this.getAll();
                     <td>{e.facultyname}</td>
                     <td>{e.username}</td>
                     <td>{e.password}</td>
-                    <td>{e.eventname}</td>   
+                    <td>{e.eventname}</td>  
+                    <td>{e.status}</td> 
                     <td><Button onClick={this.Delete=()=>{
                         console.log(e)
                           axios.delete("https://skc-api-db.herokuapp.com/api/faculty/delete",{data:{username:`${e.username}`}})

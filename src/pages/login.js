@@ -75,7 +75,7 @@ const cformik=useFormik({initialValues:{
       if(req.data==="user not found"){
         toast.error(req.data)
       }else{
-        dispatch(login({username:cformik.values.username}))
+        dispatch(login({username:cformik.values.username,status:req.data}))
         toast.success("Welcome to SKC")
         navigate("/dashboard")
   
