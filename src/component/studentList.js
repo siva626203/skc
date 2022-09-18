@@ -20,7 +20,7 @@ this.getAll();
     }
 
  getAll=()=>{
-      axios.get("http://localhost:8080/api/student/details")
+      axios.get("https://skc-api-db.herokuapp.com/api/student/details")
             .then((req,res)=>{
                 this.setState({
                     sdata:req.data
@@ -56,7 +56,7 @@ this.getAll();
                     <td>{e.staffname}</td>
                     <td><Button onClick={this.Delete=()=>{
                         console.log(e)
-                        axios.delete("http://localhost:8080/api/student/delete",e)
+                        axios.delete("https://skc-api-db.herokuapp.com/api/student/delete",e)
                         .then((req,res)=>{
                             toast.success("Deleted successfully");
                             this.getAll();
