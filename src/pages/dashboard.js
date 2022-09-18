@@ -104,7 +104,7 @@ useEffect(()=>{
            </Fragment>
            :null}
            {(currentUser.status==="admin") ? <ListTable/>:null }
-           
+           <Student/>
 
         </div>
     )
