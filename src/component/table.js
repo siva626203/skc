@@ -9,9 +9,8 @@ class ListTable extends React.Component
     {
         super();
         this.state={
-            data:[{
-                
-            }]
+            data:[],
+            fdata:[]
             
         }
     }
@@ -26,6 +25,18 @@ this.getAll();
             .then((req,res)=>{
                 this.setState({
                     data:req.data
+                })
+                
+                console.log(req.data);
+                
+                console.log();
+            }).catch((e)=>{
+                console.log(e);
+            })
+            axios.get("https://skc-api-db.herokuapp.com/api/faculty/datails")
+            .then((req,res)=>{
+                this.setState({
+                    fdata:req.data
                 })
                 
                 console.log(req.data);
@@ -75,7 +86,47 @@ this.getAll();
                 )
             } 
           </tbody>
+
         </Table>
+        <Table responsive striped bordered hover size="sm">
+            <thead>
+            <tr>
+              <th>S.No</th>
+                <th>Faculty Name</th>
+                <th>Faculty userName</th>
+                <th>Faculty password</th>
+                <th>Faculty eventname</th>
+                <td>Delete</td>
+            </tr>
+            <Button onClick={this.getAll}>Refresh</Button>
+          </thead>
+          <tbody>
+          {
+            
+            this.state.fdata.map(e=>
+                <tr key={e._id}>
+                    <td>{e._id}</td>
+                    <td>{e.facultyname}</td>
+                    <td>{e.username}</td>
+                    <td>{e.password}</td>
+                    <td>{e.eventname}</td>   
+                    <td><Button onClick={this.Delete=()=>{
+                        console.log(e)
+                          axios.delete("https://skc-api-db.herokuapp.com/faculty/delete",{data:{username:`${e.username}`}})
+                          .then((req,res)=>{
+                              toast.success("Deleted successfully");
+                              this.getAll();
+                              
+                              console.log(req);
+                          }).catch((e=>toast.error(e)))
+                          
+                    }}>Delete</Button></td>
+                </tr>
+                
+                )
+            } 
+          </tbody>
+          </Table>
      
         </Fragment>
     }

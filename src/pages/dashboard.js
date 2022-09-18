@@ -1,11 +1,49 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useSelector,useDispatch } from "react-redux";
 import { logout } from "../features/user";
 import axios from "axios";
 import ListTable from "../component/table";
+import { useFormik, yupToFormErrors } from "formik";
+import * as yup  from 'yup';
+import {toast} from 'react-toastify'
+
 function Dashboard(){
+    const formik=useFormik({
+        initialValues:{
+            facultyname:"",
+            username:"",
+            password:"",
+            eventname:""
+        },
+        validationSchema:yup.object({
+            facultyname:yup.string()
+            .required("This Field is required"),
+            username:yup.string()
+            .required("*"),
+            password:yup.string()
+            .required("*"),
+            eventname:yup.string()
+            .required("Event Name is required")
+        }),
+        onSubmit:(data)=>{
+            axios.post("https://skc-api-db.herokuapp.com/api/faculty/register",data)
+            .then((req,res)=>{
+                if(req.data==="username already Exist")
+                {
+               toast.error(req.data)
+               
+                }else{
+                    toast.success(req.data)
+                }
+               
+            })
+            .catch((e)=>{
+                console.log(e)
+            })
+        }
+    })
     const dispatch=useDispatch();
     const navigate=useNavigate()
     
@@ -33,6 +71,33 @@ useEffect(()=>{
            <h1> dashboard</h1>
            <h1>Welcome to Our {currentUser.username}</h1>
            <Button onClick={Logout}>Logout</Button>
+           {(currentUser.status==="admin")? <Fragment>
+            <Form className="login" onSubmit={formik.handleSubmit}>
+                <Form.Label>Faculty Add Form</Form.Label>
+                <Form.Group>
+                <Form.Label>Enter Faculty Name</Form.Label>
+                <Form.Control value={formik.values.facultyname} type="text" onChange={formik.handleChange} name="facultyname"></Form.Control>
+                {<p className='text-danger'>{formik.errors.facultyname}</p>}
+                <Form.Label>Enter Login Username</Form.Label>
+                <Form.Control value={formik.values.username} type="text" onChange={formik.handleChange} name="username"></Form.Control>
+                {<p className='text-danger'>{formik.errors.username}</p>}
+                <Form.Label>Enter Login Password</Form.Label>
+                <Form.Control value={formik.values.password} type="text" onChange={formik.handleChange} name="password"></Form.Control>
+                {<p className='text-danger'>{formik.errors.password}</p>}
+                <Form.Label>Select Event Judge</Form.Label>
+                <Form.Select value={formik.values.eventname} type="text" onChange={formik.handleChange} name="eventname">
+                <option>{formik.values.eventname}</option>
+                 <option>Web design</option>
+                 <option>Debuging</option>
+                 <option>Dance</option>
+                 <option>Paper Presentation</option>
+                </Form.Select>
+                {<p className='text-danger'>{formik.errors.eventname}</p>}
+                <Button variant="primary" type="submit">Submit</Button>
+                </Form.Group>
+            </Form>
+           </Fragment>
+           :null}
            {(currentUser.status==="admin") ? <ListTable/>:null }
            
 
