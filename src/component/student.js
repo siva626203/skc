@@ -21,7 +21,7 @@ function Student(){
             
         }),
         onSubmit:(data)=>{
-            axios.post("http://localhost:8080/api/student/register",data)
+            axios.post("https://skc-api-db.herokuapp.com/api/student/register",data)
             .then((req,res)=>{
              toast.success("Data Saved"); 
              console.log(req)  
