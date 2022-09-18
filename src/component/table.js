@@ -10,7 +10,7 @@ class ListTable extends React.Component
         super();
         this.state={
             data:[],
-            fdata:[]
+            fdata:[],
             
         }
     }

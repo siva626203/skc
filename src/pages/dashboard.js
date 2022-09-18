@@ -8,6 +8,8 @@ import ListTable from "../component/table";
 import { useFormik, yupToFormErrors } from "formik";
 import * as yup  from 'yup';
 import {toast} from 'react-toastify'
+
+import StudentList from "../component/studentList";
 import Student from "../component/student";
 
 function Dashboard(){
@@ -104,7 +106,7 @@ useEffect(()=>{
            </Fragment>
            :null}
            {(currentUser.status==="admin") ? <ListTable/>:null }
-           <Student/>
+           {(currentUser.status==="college")?<Fragment><Student/><StudentList/></Fragment>:null}
 
         </div>
     )
