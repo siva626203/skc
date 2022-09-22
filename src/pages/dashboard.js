@@ -11,6 +11,9 @@ import {toast} from 'react-toastify'
 
 import StudentList from "../component/studentList";
 import Student from "../component/student";
+import { current } from "@reduxjs/toolkit";
+import StudentShort from "../component/studentsort";
+import FacultyDash from "../component/facultyform";
 
 function Dashboard(){
     const formik=useFormik({
@@ -56,7 +59,7 @@ function Dashboard(){
    const usercheck=()=>setUser(currentUser.username);
     const check=()=>{
         usercheck()
-       console.log(currentUser.status)
+        
         if(currentUser.username==null){
         navigate("/login")
         }
@@ -68,13 +71,18 @@ function Dashboard(){
 useEffect(()=>{
     check();
    
-    console.log(user)
+    
 },[]);
     return(
         <div>
            <h1> dashboard</h1>
            <h1>Welcome to Our {currentUser.username}</h1>
-           <Button onClick={Logout}>Logout</Button>
+           <Button onClick={Logout}>Logout</Button><br/>
+           {(currentUser.status==="admin") ? <ListTable/>:null }<br/>
+           {(currentUser.status==="admin")?<Fragment><Student/><StudentList/></Fragment>:null}
+           {(currentUser.status==="college")?<Fragment><Student/><StudentShort username={currentUser.username}/></Fragment>:null}
+           {(currentUser.status==="admin")?<Fragment><StudentList/></Fragment>:null}
+           {(currentUser.status==='faculty'?<Fragment><FacultyDash/></Fragment>:null)}
            {(currentUser.status==="admin")? <Fragment>
             <Form className="login" onSubmit={formik.handleSubmit}>
                 <Form.Label>Faculty Add Form</Form.Label>
@@ -104,9 +112,8 @@ useEffect(()=>{
                 </Form.Group>
             </Form>
            </Fragment>
-           :null}
-           {(currentUser.status==="admin") ? <ListTable/>:null }
-           {(currentUser.status==="college")?<Fragment><Student/><StudentList/></Fragment>:null}
+           :null}<br/>
+          
 
         </div>
     )

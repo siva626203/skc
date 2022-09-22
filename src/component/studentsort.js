@@ -1,32 +1,34 @@
-import React from "react";
-import { Button, Table } from "react-bootstrap";
-import { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
-import {toast} from 'react-toastify'
-class StudentList extends React.Component
+import { useSelector } from "react-redux";
+import {Table,Button} from 'react-bootstrap'
+import  {toast} from 'react-toastify'
+
+class StudentShort extends React.Component
 {
     constructor()
     {
         super();
         this.state={
             sdata:[]
-            
+          
         }
     }
     componentDidMount(){
-
 this.getAll();
 
     }
 
  getAll=()=>{
-      axios.get("https://skc-api-db.herokuapp.com/api/student/details")
-            .then((req,res)=>{
-                this.setState({
-                    sdata:req.data
-
+    
+      axios.get("http://localhost:8080/api/student/details")
+      .then()
+            .then(async(req,res)=>{
+                var data=req.data;
+               this.setState({
+                    sdata: req.data
                 })
-                console.log(req.data);
+             
             }).catch((e)=>{
                 console.log(e);
             })
@@ -48,7 +50,9 @@ this.getAll();
           <tbody>
           {
             
-            this.state.sdata.map(e=>
+           this.state.sdata.map((e)=>{
+            if(e.staffname===this.props.username){
+            return <Fragment>
                 <tr key={e._id}>
                     <td>{e._id}</td>
                     <td>{e.sname}</td>
@@ -56,10 +60,12 @@ this.getAll();
                     <td>{e.staffname}</td>
                     <td><Button onClick={this.Delete=()=>{
                         console.log(e)
-                        axios.delete("https://skc-api-db.herokuapp.com/api/student/delete",e)
+                        axios.delete("http://localhost:8080/api/student/delete",e)
                         .then((req,res)=>{
                             if(req.data==="deleted"){
                             toast.success("Deleted successfully");
+                            }else{
+                                toast.error("something Wrong")
                             }
                             this.getAll();
                             
@@ -68,8 +74,13 @@ this.getAll();
                           
                     }}>Delete</Button></td>
                 </tr>
-                
+                </Fragment>
+           }else{
+            return null;
+           }
+        }
                 )
+        
             } 
           </tbody>
 
@@ -77,5 +88,5 @@ this.getAll();
         </Fragment>
     }
     
-}
-export default StudentList;
+}  
+  export default StudentShort;

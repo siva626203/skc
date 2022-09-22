@@ -85,9 +85,40 @@ const cformik=useFormik({initialValues:{
       console.log(err)
     })
   }
-  
-  
   })
+  const fformik=useFormik({initialValues:{
+    username:"",
+    password:""
+    },
+    validationSchema:yup.object({
+      username:yup.string()
+      .required("This field is required"),
+      password:yup.string()
+      .required("*")
+    }),
+    onSubmit:(data)=>{
+      console.log(data)
+      axios.post("https://skc-api-db.herokuapp.com/api/auth/faculty/login",data)
+      .then((req,res)=>{
+        
+        console.log(req)
+        
+        if(req.data==="user not found"){
+          toast.error(req.data)
+        }else{
+          dispatch(login({username:fformik.values.username,status:req.data}))
+          toast.success("Welcome to SKC")
+          navigate("/dashboard")
+    
+        }
+        
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }
+    
+    
+    })
   return (
     < div className='login'>
     < div className='cl-login'>
@@ -158,15 +189,17 @@ const cformik=useFormik({initialValues:{
           <Modal.Title>Faculty Login
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body><Form>
+        <Modal.Body> <Form onSubmit={fformik.handleSubmit}>
                 <Form.Group>
                     <Form.Label>Enter Your UserName</Form.Label>
-                    <Form.Control type='text' required/>
+                    <Form.Control type='text' onChange={fformik.handleChange} required name="username" value={fformik.values.username}/>
+                    {<p className='text-danger'>{fformik.errors.username}</p>}
                     <Form.Label>Enter Your password</Form.Label>
-                    <Form.Control type='password' required/>
+                    <Form.Control type="text" required name="password" value={fformik.values.password} onChange={fformik.handleChange}/>
+                    {<p className='text-danger'>{fformik.errors.password}</p>}
                     <Button type='submit' variant='success'>SUBMIT</Button>
-                </Form.Group>
-            </Form></Modal.Body>
+                </Form.Group></Form>
+                </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={fhandleClose}>
             Close
