@@ -104,7 +104,7 @@ useEffect(()=>{
                  <option>Web design</option>
                  <option>Debuging</option>
                  <option>Dance</option>
-                 <option>Paper Presentation</option>
+                 <option>Paper presentation</option>
                 </Form.Select>
                 {<p className='text-danger'>{formik.errors.eventname}</p>}
                 <Form.Label>Position</Form.Label>
