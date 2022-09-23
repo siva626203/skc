@@ -38,12 +38,12 @@ function FacultyDash(){
             axios.post("https://skc-api-db.herokuapp.com/api/faculty/mark",data)
             .then((req,res)=>{
                 console.log(req)
-                if(req.data==="mark saved")
+                if(req.data==="data saved")
                 {
-               toast.success(req.data)
-               
-                }else{
-                    toast.error(req.data)
+               toast.success("mark Saved")
+                }
+                if(req.data==="Mark already Posted"){
+                 toast.error("Mark already Posted")
                 }
                
             })

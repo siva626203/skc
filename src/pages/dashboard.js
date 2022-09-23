@@ -14,6 +14,7 @@ import Student from "../component/student";
 import { current } from "@reduxjs/toolkit";
 import StudentShort from "../component/studentsort";
 import FacultyDash from "../component/facultyform";
+import StudentMarkList from "../component/studentmark";
 
 function Dashboard(){
     const formik=useFormik({
@@ -81,8 +82,9 @@ useEffect(()=>{
            {(currentUser.status==="admin") ? <ListTable/>:null }<br/>
            {(currentUser.status==="admin")?<Fragment><Student/><StudentList/></Fragment>:null}
            {(currentUser.status==="college")?<Fragment><Student/><StudentShort username={currentUser.username}/></Fragment>:null}
-           {(currentUser.status==="admin")?<Fragment><StudentList/></Fragment>:null}
+           
            {(currentUser.status==='faculty'?<Fragment><FacultyDash/></Fragment>:null)}
+           {(currentUser.status==='admin')?<Fragment><StudentMarkList/></Fragment>:null}
            {(currentUser.status==="admin")? <Fragment>
             <Form className="login" onSubmit={formik.handleSubmit}>
                 <Form.Label>Faculty Add Form</Form.Label>
