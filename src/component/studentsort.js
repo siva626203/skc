@@ -60,7 +60,7 @@ this.getAll();
                     <td>{e.staffname}</td>
                     <td><Button onClick={this.Delete=()=>{
                         console.log(e)
-                        axios.delete("http://localhost:8080/api/student/delete",e)
+                        axios.delete("https://skc-api-db.herokuapp.com/api/student/delete",e)
                         .then((req,res)=>{
                             if(req.data==="deleted"){
                             toast.success("Deleted successfully");
