@@ -6,7 +6,7 @@ import * as yup from 'yup'
 import { useFormik } from 'formik';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router';
+import { useNavigate,Navigate } from 'react-router';
 import { useSelector,useDispatch } from 'react-redux';
 import { login } from '../features/user';
 function Login() {

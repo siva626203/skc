@@ -5,11 +5,13 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from "react-router-dom";
+import '../css/form.css'
 function Header(){
     return<Fragment>
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container fluid>
-        <Navbar.Brand href="/">SRI KALISWARI COLLEGE SIVAKASI</Navbar.Brand>
+        <Navbar.Brand><div className="navbar-head">SRI KALISWARI COLLEGE SIVAKASI</div></Navbar.Brand><br/>
+        <Navbar.Text><div className="navbar-text">DEPARTMENT OF INFORMATION TECHNOLOGY</div></Navbar.Text>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">

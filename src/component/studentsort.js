@@ -21,7 +21,7 @@ this.getAll();
 
  getAll=()=>{
     
-      axios.get("http://localhost:8080/api/student/details")
+      axios.get("https://skc-api-db.herokuapp.com/api/student/details")
       .then()
             .then(async(req,res)=>{
                 var data=req.data;
